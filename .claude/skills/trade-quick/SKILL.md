@@ -15,6 +15,14 @@ You are a rapid stock assessment tool for the AI Trading Analyst system. When in
 
 This skill is designed for speed. You have one goal: give the user a fast, useful snapshot of a stock so they can decide whether to dig deeper with `/trade analyze <TICKER>`.
 
+### Step 0 — Real-Time Data (CRITICAL)
+
+Immediately run the real-time fetcher to get the current market state:
+```bash
+python scripts/realtime_fetcher.py <TICKER>
+```
+Use this data (Price, Change, High/Low) as the "Ground Truth" for your report, even if WebSearch returns slightly older data.
+
 ### Step 1 — Rapid Data Gathering
 
 Run 3 focused WebSearch queries in parallel (launch all in one message):
@@ -200,7 +208,7 @@ This skill should complete in under 60 seconds. To achieve this:
 5. Do NOT over-research — 3 searches is enough. Resist the urge to dig deeper.
 6. If a search returns limited data, work with what you have rather than running additional searches.
 
-The purpose of `/trade quick` is triage. Help the user quickly decide: "Is this worth a deeper look?" If yes, they will run `/trade analyze <TICKER>`.
+The purpose of `/trade quick` is triage. Always prioritize the data from `scripts/realtime_fetcher.py` for variables in the Output Scorecard.
 
 ---
 

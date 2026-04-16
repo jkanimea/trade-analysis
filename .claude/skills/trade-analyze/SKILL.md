@@ -19,6 +19,14 @@ There are three distinct phases. Execute them in strict order.
 
 Before launching any agents, YOU must gather the foundational data they all need. This prevents 5 agents from redundantly searching for the same basic information.
 
+**Step 0 — Real-Time Snapshot (CRITICAL)**
+
+Run the real-time fetcher before any other research:
+```bash
+python scripts/realtime_fetcher.py <TICKER>
+```
+Use the output (Price, Change, High/Low, Volume) as the absolute "Ground Truth" for the `DISCOVERY_BRIEF`.
+
 **Step 1 — Current Price & Market Context**
 
 Use WebSearch to find:
@@ -548,10 +556,9 @@ After writing the file, display a summary in the terminal:
 1. ALWAYS complete Phase 1 yourself before launching agents. Agents depend on the Discovery Brief.
 2. ALWAYS launch all 5 agents in a SINGLE message for parallel execution.
 3. NEVER fabricate data. If you cannot find a metric, say "Data not available" rather than guessing.
-4. ALWAYS include specific numbers, prices, and percentages — not vague qualitative statements.
-5. ALWAYS include the full disclaimer in the output report.
-6. ALWAYS note the date of analysis — market data has a shelf life.
-7. ALWAYS present both bull and bear perspectives — never one-sided.
-8. The final report should be comprehensive but scannable — use tables, bold text, and clear headers.
+4. ALWAYS prioritize data from `scripts/realtime_fetcher.py` for current pricing and intraday stats.
+5. ALWAYS note the date and EXACT TIMESTAMP of analysis — market data has a shelf life.
+6. ALWAYS present both bull and bear perspectives — never one-sided.
+7. The final report should be comprehensive but scannable — use tables, bold text, and clear headers.
 
 **DISCLAIMER: This is for educational and research purposes only. Not financial advice. Always do your own due diligence.**
